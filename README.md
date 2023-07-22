@@ -1,2 +1,2 @@
 # Courses
- A repository for storing my coursework and related materials for the courses I'll be taking.
+This repository contains coursework and related materials for various courses I am taking. Each subfolder represents a separate course.
