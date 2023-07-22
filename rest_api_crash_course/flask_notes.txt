@@ -1,0 +1,67 @@
+_WORKING ON THE TERMINAL AND THE PIM
+>>		when working on the terminal
+	>>>	when working under the Python interactive mode
+
+#before starting a flask app
+
+>> export FLASK_APP=application.py
+>> export FLASK_ENV=development.py
+>> flask run
+
+*** Note: Unlike the tutorial I had to kill the process (ctrl+c) and run the "flask run" command everythime I made changes, so I could get the expected output.
+
+#setting up the database
+
+>> python
+	>>> from application import db, app
+	>>> app.app_context().push()
+	>>> db.create_all()
+
+# when working under the python interactive environment, evrythin needs to be importe from the application you're working on. In this case if the we're working on the application.py file, then this is how it should look like:
+
+	>>> from application import Drink
+	>>> drink  = Drink(name="Grape Soda", description="Taste like grapes")  
+	>>> drink
+
+#to add this info to our data.db table:
+
+	>>> db.session.add(drink)
+	>>> db.session.commit()
+
+#checking all our Drinks
+
+	>>> Drink.query.all()
+	[Grape Soda - Taste like grapes]
+
+#adding another drink
+
+	>>> db.session.add(Drink(name="Cherry", description="Taste like that one ice cream"))
+	>>> db.session.commit()
+	>>> Drink.query.all()
+	[Grape Soda - Taste like grapes, Cherry - Taste like that one ice cream]
+
+# exiting Python interactive mode and going back to Flask
+
+	>>> exit()
+>> flask run
+
+#now, we need to create a way to get those drinks inside this block of code in application.py
+
+				@app.route('/drinks')
+				def get_drinks():
+
+					return {"drinks": "drink data"}
+	
+it will look like this:
+		
+				@app.route('/drinks')
+				def get_drinks():
+					drinks = Drink.query.all()
+
+					output = []
+					for drink in drinks:
+						drink_data  = {'name': drink.name, 'description': drink.description}
+						output.append(drink_data)
+
+					return {"drinks": output}	
+
