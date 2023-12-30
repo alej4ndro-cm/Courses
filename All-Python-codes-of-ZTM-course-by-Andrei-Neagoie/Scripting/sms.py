@@ -6,14 +6,14 @@ Created on Wed Aug 26 10:01:55 2020
 """
 from twilio.rest import Client
 
-account_sid = 'AC35a43368114f115baac776029167317c'
-auth_token = '8cfe654e7fa576d7961f8698f0b015fd'
+account_sid = 'AC81b9792793babfb7efdbbfe8f5c9a08c'
+auth_token = '0fc0ce9104f6dc3863ed0e66c6632040'
 client = Client(account_sid, auth_token)
 
 message = client.messages.create(
-    from_='+19284823038',
-    body='Hello Saurabh, this is your bot JARVIS! Good Morning!',
-    to='+919652723113'
-    )
+    from_='+18663657084',
+    body='Hello!',
+    to='+17865689952'
+)
 
 print(message.sid)
